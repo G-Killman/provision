@@ -56,6 +56,13 @@ body {
   font-weight: 800;
   letter-spacing: 0.02em;
   color: #ffffff;
+  text-decoration: none;
+}
+
+.top-banner-name:hover,
+.top-banner-name:focus-visible {
+  text-decoration: underline;
+  outline: none;
 }
 
 .top-banner-phone {
