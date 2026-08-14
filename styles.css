@@ -1,0 +1,672 @@
+/* Base colors and variables: these are the defaults the four color inputs can change. */
+:root {
+  color-scheme: light;
+  --bg: #f5efe7;
+  --bg-alt: #ebe1d5;
+  --surface: rgba(241, 243, 246, 0.96);
+  --surface-strong: #e7ebf0;
+  --text: #1d2328;
+  --muted: #5f6970;
+  --primary: #be5a2b;
+  --secondary: #8d3414;
+  --accent: #d46d31;
+  --border: rgba(120, 130, 140, 0.2);
+  --shadow: 0 16px 36px rgba(31, 41, 55, 0.08);
+}
+
+/* Keep sizing predictable everywhere on the page. */
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth anchor jumps between sections. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* The full page background and default text style. */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #2459c3 0%, #1b459b 100%);
+}
+
+/* Sticky utility banner for the company name and direct phone contact. */
+.top-banner {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, #2459c3 0%, #1b459b 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 24px rgba(15, 31, 77, 0.22);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.top-banner-name {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.top-banner-phone {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.top-banner-phone:hover {
+  filter: brightness(1.06);
+}
+
+/* Light grid overlay so the page feels structured without heavy decoration. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+}
+
+/* Outer wrapper that keeps everything centered and narrow enough to read. */
+.page-shell {
+  width: min(100% - 12px, 980px);
+  margin: 0 auto;
+  padding: 12px 0 32px;
+}
+
+/* Shared card look for the main page blocks. */
+.site-header,
+.hero,
+.section,
+.contact-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* Header block: brand, color controls, and top navigation. */
+.site-header {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 20px;
+}
+
+/* Brand line: logo mark plus business name. */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Tiny square logo placeholder. */
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+/* Remove default spacing from all the main headings. */
+.brand h1,
+.hero h2,
+.section h3,
+.service-list h4,
+.quote blockquote,
+.contact-panel h3 {
+  margin: 0;
+}
+
+.brand h1 {
+  font-size: 1.05rem;
+  line-height: 1.1;
+}
+
+/* Navigation links at the top of the page. */
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Shared pill-button shape for nav links and action buttons. */
+.site-nav a,
+.button {
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease,
+    border-color 160ms ease, color 160ms ease, filter 160ms ease;
+}
+
+/* Regular top navigation links. */
+.site-nav a {
+  width: 100%;
+  padding: 11px 14px;
+  color: #1e2a3a;
+  background: linear-gradient(180deg, #ffffff 0%, #e8edf4 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 18px rgba(15, 31, 77, 0.16);
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  transform: translateY(-1px);
+  color: #0f1f4d;
+  box-shadow: 0 12px 24px rgba(15, 31, 77, 0.22);
+  border-color: rgba(255, 255, 255, 0.8);
+  outline: none;
+}
+
+/* Master color control: the four small inputs that change the page colors. */
+.theme-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-strong);
+}
+
+/* The actual color buttons. */
+.theme-selector input[type="color"] {
+  width: 100%;
+  height: 32px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+}
+
+.theme-selector input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.theme-selector input[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Main page stack: every section is spaced apart here. */
+main {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Big opening block: message on the left, facts on the right. */
+.hero,
+.section,
+.contact-panel {
+  border-radius: 22px;
+  padding: 14px;
+}
+
+/* Hero section layout. */
+.hero {
+  display: grid;
+  gap: 18px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  border-radius: 0;
+  padding: 32px 0 40px;
+  min-height: clamp(560px, 82svh, 900px);
+  align-content: space-between;
+  background:
+    linear-gradient(180deg, rgba(10, 25, 60, 0.22) 0%, rgba(10, 25, 60, 0.76) 100%),
+    url("images/ERO-PROVISION.webp") center center / cover no-repeat;
+  border: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+/* Centered inner layout for the full-bleed hero background. */
+.hero-content {
+  width: min(100% - 24px, 980px);
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+  align-items: start;
+  justify-items: center;
+  height: 100%;
+}
+
+/* Hero copy floats directly on the background image without a box container. */
+.hero-copy {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Large opening headline. */
+.hero h2 {
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  line-height: 1.02;
+  max-width: 14ch;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+/* Shared text styling for paragraphs and the quote line. */
+.lead,
+.section p,
+.service-list p,
+.contact-panel p,
+.quote blockquote {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.hero .eyebrow,
+.hero .lead {
+  color: #f3f6fb;
+}
+
+/* Short intro paragraph under the main headline. */
+.lead {
+  margin: 14px 0 0;
+  max-width: 58ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Two main action buttons in the hero. */
+.hero-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Basic button shape used everywhere. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  width: 100%;
+  padding: 0 16px;
+  box-shadow: 0 10px 22px rgba(15, 31, 77, 0.18);
+}
+
+/* Main button style. */
+.button-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #2b67e0 0%, #1b459b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Secondary button style. */
+.button-secondary {
+  color: #1e2a3a;
+  background: linear-gradient(180deg, #ffffff 0%, #e8edf4 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  outline: none;
+}
+
+/* Small facts card next to the hero text. */
+/* Services bullet strip across the bottom of the hero. */
+.hero-services {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.hero-services li {
+  padding: 0;
+  font-weight: 800;
+}
+
+.hero-services li::before {
+  content: "• ";
+}
+
+/* Generic section wrapper for services and contact blocks. */
+.section {
+  display: grid;
+  gap: 14px;
+}
+
+/* Heading area at the top of each section. */
+.section-heading {
+  display: grid;
+  gap: 6px;
+}
+
+/* Service cards stacked on mobile and spread out on larger screens. */
+.service-list {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Nested bullets inside each service card. */
+.service-list ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.service-list ul li {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Row of category buttons on the gallery page. */
+.category-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Thumbnail cards that act as navigation into each sub-gallery. */
+.gallery-index-grid {
+  align-items: start;
+}
+
+.gallery-index-card {
+  display: grid;
+  gap: 12px;
+}
+
+.gallery-feature-card {
+  border-style: dashed;
+}
+
+.gallery-thumb-link {
+  display: block;
+  text-decoration: none;
+}
+
+/* Gallery sections are the category containers on the separate gallery page. */
+.gallery-section {
+  gap: 16px;
+}
+
+/* Grid for the images inside each category. */
+.gallery-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+/* Keep the whole site stacked and easy to scan on a phone. */
+.hero,
+.section,
+.contact-panel,
+.site-header,
+.gallery-card,
+.hero-card,
+.stat-grid div,
+.service-list > li {
+  width: 100%;
+}
+
+/* Individual image card in a category gallery. */
+.gallery-card {
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+}
+
+/* Image-only gallery cards keep the image centered with even padding. */
+.gallery-image-card {
+  padding: 12px;
+}
+
+/* Actual staged image inside each gallery card. */
+.gallery-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--bg), var(--surface-strong));
+}
+
+.gallery-image-card .gallery-image {
+  margin-bottom: 0;
+}
+
+/* Simple placeholder block where staged gallery images go later. */
+.gallery-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--bg), var(--surface-strong));
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.gallery-card h4 {
+  margin: 0;
+}
+
+.gallery-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Keep the address element looking normal instead of italic. */
+.contact-panel address {
+  font-style: normal;
+}
+
+/* Footer line at the bottom of the page. */
+.site-footer {
+  padding: 14px 4px 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Contact section layout. */
+.contact-panel {
+  display: grid;
+  gap: 16px;
+}
+
+/* Netlify form styling on the home page keeps the same stacked, polished feel. */
+.form-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.netlify-form {
+  display: grid;
+  gap: 14px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.netlify-form label {
+  display: grid;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.netlify-form input,
+.netlify-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  box-shadow: inset 0 1px 2px rgba(31, 41, 55, 0.04);
+}
+
+.netlify-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.form-full {
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  margin-top: 0;
+}
+
+/* Simple entry animation for the page sections. */
+.reveal {
+  animation: rise 700ms ease both;
+}
+
+/* Slight delay for the second item in a group. */
+.delay-1 {
+  animation-delay: 100ms;
+}
+
+/* Slightly longer delay for the third item in a group. */
+.delay-2 {
+  animation-delay: 180ms;
+}
+
+/* Fade and slide up animation. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bigger-screen layout: header, hero, and cards spread out a bit. */
+@media (min-width: 720px) {
+  .page-shell {
+    width: min(100% - 32px, 980px);
+    padding-top: 18px;
+  }
+
+  .top-banner {
+    flex-direction: row;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .site-nav {
+    justify-content: flex-end;
+  }
+
+  .site-nav a,
+  .button {
+    width: auto;
+  }
+
+  .theme-selector {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hero-content {
+    grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+    align-items: start;
+  }
+
+  .hero-copy {
+    min-height: 100%;
+  }
+
+  .hero-services {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-self: end;
+    gap: 10px 18px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-area-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .service-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .contact-panel {
+    grid-template-columns: 1.4fr auto;
+    align-items: center;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "construction-gallery-template",
+  "version": "1.0.0",
+  "description": "A reusable static template you can keep on your hard drive, copy into new projects, and open quickly for fast builds.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "process:images": "node process-images.js",
+    "process:gallery": "node process-images.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.35.3"
+  }
+}
