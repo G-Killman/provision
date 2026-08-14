@@ -293,6 +293,51 @@ main {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
+/* Gallery hero copy uses a royal blue brand treatment. */
+.gallery-hero .hero-copy {
+  width: min(100% - 24px, 760px);
+  margin: 0 auto;
+  padding: clamp(18px, 4vw, 30px);
+  border-radius: 24px;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  color: #000000;
+  text-shadow: none;
+}
+
+/* Hard override for the gallery hero panel so it stays plain bright white. */
+.gallery-hero .hero-copy.hero-copy-bright {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Remove the dark gradient wash from gallery heroes so the white card stays bright. */
+.gallery-hero::before {
+  background: transparent;
+}
+
+.gallery-hero .hero-copy .eyebrow,
+.gallery-hero .hero-copy .lead,
+.gallery-hero .hero-copy h2 {
+  color: #000000;
+}
+
+.gallery-hero .hero-actions .button-secondary {
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
 /* Large opening headline. */
 .hero h2 {
   font-size: clamp(2rem, 8vw, 3.4rem);
