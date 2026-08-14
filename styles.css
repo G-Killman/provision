@@ -347,7 +347,7 @@ main {
 
 /* Large opening headline. */
 .hero h2 {
-  font-size: clamp(2rem, 8vw, 3.4rem);
+  font-size: clamp(1.9rem, 7vw, 3rem);
   line-height: 1.02;
   max-width: 14ch;
   margin: 0 auto;
@@ -367,6 +367,19 @@ main {
 .hero .eyebrow,
 .hero .lead {
   color: #f3f6fb;
+}
+
+/* Company name line at the top of the home hero. */
+.hero-company-name {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: clamp(2rem, 5.5vw, 3.6rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Short intro paragraph under the main headline. */
