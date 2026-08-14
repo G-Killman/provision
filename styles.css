@@ -228,18 +228,44 @@ main {
 .hero {
   display: grid;
   gap: 18px;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
+  margin-left: 0;
   border-radius: 0;
   padding: 32px 0 40px;
   min-height: clamp(560px, 82svh, 900px);
   align-content: space-between;
-  background:
-    linear-gradient(180deg, rgba(10, 25, 60, 0.22) 0%, rgba(10, 25, 60, 0.76) 100%),
-    url("images/ERO-PROVISION.webp") center center / cover no-repeat;
+  position: relative;
+  isolation: isolate;
+  background: #0f2f73;
   border: 0;
   box-shadow: none;
   overflow: hidden;
+}
+
+/* Full-bleed hero image layer behind the copy. */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 25, 60, 0.22) 0%, rgba(10, 25, 60, 0.76) 100%);
 }
 
 /* Centered inner layout for the full-bleed hero background. */
@@ -251,6 +277,8 @@ main {
   align-items: start;
   justify-items: center;
   height: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 /* Hero copy floats directly on the background image without a box container. */
@@ -295,6 +323,20 @@ main {
   max-width: 58ch;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Small callout line in the hero. */
+.hero-badge {
+  width: fit-content;
+  margin: 14px auto 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Two main action buttons in the hero. */
@@ -596,6 +638,10 @@ main {
 
 /* Bigger-screen layout: header, hero, and cards spread out a bit. */
 @media (min-width: 720px) {
+  body::before {
+    opacity: 0;
+  }
+
   .page-shell {
     width: min(100% - 32px, 980px);
     padding-top: 18px;
@@ -625,8 +671,14 @@ main {
   }
 
   .hero-content {
-    grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    align-items: center;
+    width: min(100% - 24px, 1200px);
+  }
+
+  .hero {
+    background: #0f2f73;
   }
 
   .hero-copy {
@@ -643,6 +695,8 @@ main {
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
 
   .form-grid {
